@@ -1,20 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 import openai
 import streamlit as st
 
-
-# In[2]:
-
+#api key
 
 openai.api_key='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'
-
-
-# In[3]:
 
 
 #Main function. Each step you select will take you to the function that will be executed.
@@ -31,9 +21,6 @@ def main():
         content()
 
 
-# In[4]:
-
-
 #writing a blog article with Python programming being the selected niche. We narrow down the niche to data science.
 ##the prompt is the question that we will feed to the model.
 def topics():
@@ -43,8 +30,6 @@ def topics():
     if st.button('Send'):
         st.text(BlogTopics(prompt))
 
-
-# In[5]:
 
 
 #The prompt will be fed to the follwoing function
@@ -59,10 +44,6 @@ def BlogTopics(prompt):
       presence_penalty=0
     )
     return response.choices[0].text
-
-
-# In[ ]:
-
 
 
 
