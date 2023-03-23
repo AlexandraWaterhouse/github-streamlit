@@ -27,24 +27,24 @@ def main():
 
 def topics():
     st.header('AI Blog Writing Tool')
-    st.info('To generate blog topic, please follow the pattern given below:')
-    prompt = st.text_area('Write your words', height=50, value='Generate blog topic on data science with Python')
+    st.info('To generate blog topic, please follow the below steps:')
+    prompt = st.text_area('Your prompt here', height=50, value=' ')
     if st.button('Send'):
         st.text(BlogTopics(prompt))
 
 
 def section():
     st.header('AI Blog Writing Tool')
-    st.info('To generate blog section, please follow the pattern given below:')
-    prompt = st.text_area('Write your words', height=50, value='Write blog sections\n\nBlog topic: ')
+    st.info('To generate blog section, please follow the bellow steps:')
+    prompt = st.text_area('Your prompt here', height=50, value='Write blog sections\n\nBlog topic: ' )
     if st.button('Send'):
         st.text(BlogSections(prompt))
 
 
 def content():
     st.header('AI Blog Writing Tool')
-    st.info('To generate blog content, please follow the pattern given below:')
-    prompt = st.text_area('Write your words', height=50, value="Expand the blog section in a professional tone \n\nBlog Topic:\n\nSection:")
+    st.info('To generate blog content, please follow the below steps:')
+    prompt = st.text_area('Your prompt here', height=50, value="Expand the blog section in a professional tone \n\nBlog Topic:\n\nSection:")
     if st.button('Send'):
         st.text(BlogContent(prompt))
 
