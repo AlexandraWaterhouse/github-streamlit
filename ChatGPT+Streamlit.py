@@ -1,23 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import openai
 import streamlit as st
 
 
-# In[2]:
 
 
-openai.api_key='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'
+API_KEY = st.sidebar.text_input('Enter your API key')
+
+openai.api_key = API_KEY
 
 
-# In[3]:
 
-
-#Main function. Each step you select will take you to the function that will be executed.
 def main():
     st.sidebar.header('AI Blog Writing Tool')
     st.sidebar.info('An AI tool that can generate blog content')
@@ -31,11 +23,8 @@ def main():
         content()
 
 
-# In[4]:
 
 
-#writing a blog article with Python programming being the selected niche. We narrow down the niche to data science.
-##the prompt is the question that we will feed to the model.
 def topics():
     st.header('AI Blog Writing Tool')
     st.info('To generate blog topic, please follow the pattern given below:')
@@ -44,25 +33,62 @@ def topics():
         st.text(BlogTopics(prompt))
 
 
-# In[5]:
+def section():
+    st.header('AI Blog Writing Tool')
+    st.info('To generate blog section, please follow the pattern given below:')
+    prompt = st.text_area('Write your words', height=50, value='Write blog sections\n\nBlog topic: ')
+    if st.button('Send'):
+        st.text(BlogSections(prompt))
 
 
-#The prompt will be fed to the follwoing function
+def content():
+    st.header('AI Blog Writing Tool')
+    st.info('To generate blog content, please follow the pattern given below:')
+    prompt = st.text_area('Write your words', height=50, value="Expand the blog section in a professional tone \n\nBlog Topic:\n\nSection:")
+    if st.button('Send'):
+        st.text(BlogContent(prompt))
+
 def BlogTopics(prompt):
     response = openai.Completion.create(
-      engine="davinci-instruct-beta-v3", #ideal for generating unique blog posts
+      engine="davinci-instruct-beta-v3",
       prompt=prompt,
       temperature=0.7,
-      max_tokens=100, #the max number of words that we want the model to generate
+      max_tokens=100,
       top_p=1,
       frequency_penalty=0,
       presence_penalty=0
     )
+
+    return response.choices[0].text
+
+def BlogSections(prompt):
+    response = openai.Completion.create(
+      engine="davinci-instruct-beta-v3",
+      prompt=prompt,
+      temperature=0.6,
+      max_tokens=100,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0
+    )
+
     return response.choices[0].text
 
 
-# In[ ]:
+def BlogContent(prompt):
+    response = openai.Completion.create(
+      engine="davinci-instruct-beta-v3",
+      prompt=prompt,
+      temperature=0.7,
+      max_tokens=400,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0
+    )
+
+    return response.choices[0].text
 
 
 
-
+if __name__ == '__main__':
+    main()
