@@ -43,8 +43,8 @@ def chapter():
 
 def content():
     st.header('AI Book Writing Tool')
-    st.info('To generate book topic, please follow the below steps:')
-    prompt = st.text_area('Your prompt here', height=50, value="Write the book chapters \n\nBlog Title:\n\nChapter:")
+    st.info('To generate book Content, please follow write your prompt below:')
+    prompt = st.text_area('Your prompt here', height=50, value="Write the content for the Chapter:")
     if st.button('Send'):
         st.text(BookContent(prompt))
 
