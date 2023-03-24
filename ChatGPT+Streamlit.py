@@ -25,18 +25,18 @@ def main():
 
 
 
-def topics():
+def title():
     st.header('AI Book Writing Tool')
-    st.info('To generate book topic, please follow the below steps:')
+    st.info('To generate book Title, please write your prompt below:')
     prompt = st.text_area('Your prompt here', height=50, value=' ')
     if st.button('Send'):
-        st.text(BookTopics(prompt))
+        st.text(BookTitle(prompt))
 
 
 def chapter():
     st.header('AI Book Writing Tool')
-    st.info('To generate book topic, please follow the below steps:')
-    prompt = st.text_area('Your prompt here', height=50, value='Write book chapters\n\nBook topic: ' )
+    st.info('To generate book Chapter title, please write your prompt below:')
+    prompt = st.text_area('Your prompt here', height=50, value='Write book chapters titles\n\nBook title: ' )
     if st.button('Send'):
         st.text(BookChapters(prompt))
 
@@ -44,16 +44,16 @@ def chapter():
 def content():
     st.header('AI Book Writing Tool')
     st.info('To generate book topic, please follow the below steps:')
-    prompt = st.text_area('Your prompt here', height=50, value="Write the book chapters \n\nBlog Topic:\n\nChapter:")
+    prompt = st.text_area('Your prompt here', height=50, value="Write the book chapters \n\nBlog Title:\n\nChapter:")
     if st.button('Send'):
         st.text(BookContent(prompt))
 
-def BookTopics(prompt):
+def BookTitles(prompt):
     response = openai.Completion.create(
       engine="davinci-instruct-beta-v3",
       prompt=prompt,
       temperature=0.7,
-      max_tokens=100,
+      max_tokens=50,
       top_p=1,
       frequency_penalty=0,
       presence_penalty=0
@@ -61,12 +61,12 @@ def BookTopics(prompt):
 
     return response.choices[0].text
 
-def BookSections(prompt):
+def BookChapters(prompt):
     response = openai.Completion.create(
       engine="davinci-instruct-beta-v3",
       prompt=prompt,
       temperature=0.6,
-      max_tokens=100,
+      max_tokens=50,
       top_p=1,
       frequency_penalty=0,
       presence_penalty=0
