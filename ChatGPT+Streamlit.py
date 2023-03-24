@@ -14,11 +14,11 @@ def main():
     st.sidebar.header('AI Book Writing Tool')
     st.sidebar.info('An AI tool that can generate content for your book')
     st.sidebar.info('Start with topics\n than chapters\n than content.')
-    op = st.sidebar.selectbox('Steps', ['topics', 'chapter', 'content'])
-    if op == 'topics':
-        topics()
-    elif op == 'section':
-        section()
+    op = st.sidebar.selectbox('Steps', ['title', 'chapter', 'content'])
+    if op == 'title':
+        title()
+    elif op == 'chapter':
+        chapter()
     else:
         content()
 
@@ -36,7 +36,7 @@ def title():
 def chapter():
     st.header('AI Book Writing Tool')
     st.info('To generate book Chapter title, please write your prompt below:')
-    prompt = st.text_area('Your prompt here', height=50, value='Write book chapters titles\n\nBook title: ' )
+    prompt = st.text_area('Your prompt here', height=50, value='Write book chapters titles for a book with the Title: ' )
     if st.button('Send'):
         st.text(BookChapters(prompt))
 
