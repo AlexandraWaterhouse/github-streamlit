@@ -4,17 +4,17 @@ import streamlit as st
 
 
 
-API_KEY = st.sidebar.text_input('Enter your API key')
+API_KEY = st.sidebar.text_input('OpenAI API key')
 
 openai.api_key = API_KEY
 
 
 
 def main():
-    st.sidebar.header('AI Blog Writing Tool')
-    st.sidebar.info('An AI tool that can generate blog content')
-    st.sidebar.info('Start with the first option\n before you proceed to the next.')
-    op = st.sidebar.selectbox('Steps', ['topics', 'section', 'content'])
+    st.sidebar.header('AI Book Writing Tool')
+    st.sidebar.info('An AI tool that can generate content for your book')
+    st.sidebar.info('Start with topics\n than chapters\n than content.')
+    op = st.sidebar.selectbox('Steps', ['topics', 'chapter', 'content'])
     if op == 'topics':
         topics()
     elif op == 'section':
@@ -26,29 +26,29 @@ def main():
 
 
 def topics():
-    st.header('AI Blog Writing Tool')
-    st.info('To generate blog topic, please follow the below steps:')
+    st.header('AI Book Writing Tool')
+    st.info('To generate book topic, please follow the below steps:')
     prompt = st.text_area('Your prompt here', height=50, value=' ')
     if st.button('Send'):
-        st.text(BlogTopics(prompt))
+        st.text(BookTopics(prompt))
 
 
-def section():
-    st.header('AI Blog Writing Tool')
-    st.info('To generate blog section, please follow the bellow steps:')
-    prompt = st.text_area('Your prompt here', height=50, value='Write blog sections\n\nBlog topic: ' )
+def chapter():
+    st.header('AI Book Writing Tool')
+    st.info('To generate book topic, please follow the below steps:')
+    prompt = st.text_area('Your prompt here', height=50, value='Write book chapters\n\nBook topic: ' )
     if st.button('Send'):
-        st.text(BlogSections(prompt))
+        st.text(BookChapters(prompt))
 
 
 def content():
-    st.header('AI Blog Writing Tool')
-    st.info('To generate blog content, please follow the below steps:')
-    prompt = st.text_area('Your prompt here', height=50, value="Expand the blog section in a professional tone \n\nBlog Topic:\n\nSection:")
+    st.header('AI Book Writing Tool')
+    st.info('To generate book topic, please follow the below steps:')
+    prompt = st.text_area('Your prompt here', height=50, value="Write the book chapters \n\nBlog Topic:\n\nChapter:")
     if st.button('Send'):
-        st.text(BlogContent(prompt))
+        st.text(BookContent(prompt))
 
-def BlogTopics(prompt):
+def BookTopics(prompt):
     response = openai.Completion.create(
       engine="davinci-instruct-beta-v3",
       prompt=prompt,
@@ -61,7 +61,7 @@ def BlogTopics(prompt):
 
     return response.choices[0].text
 
-def BlogSections(prompt):
+def BookSections(prompt):
     response = openai.Completion.create(
       engine="davinci-instruct-beta-v3",
       prompt=prompt,
@@ -75,12 +75,12 @@ def BlogSections(prompt):
     return response.choices[0].text
 
 
-def BlogContent(prompt):
+def BookContent(prompt):
     response = openai.Completion.create(
       engine="davinci-instruct-beta-v3",
       prompt=prompt,
       temperature=0.7,
-      max_tokens=400,
+      max_tokens=800,
       top_p=1,
       frequency_penalty=0,
       presence_penalty=0
